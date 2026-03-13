@@ -2,6 +2,7 @@ package controller;
 
 import exceptions.ContatoNaoEncontradoException;
 import model.Contato;
+import model.ContatoComercial;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,13 @@ public class Agenda {
         Contato novoContato;
         novoContato = new Contato(nomeContato, numeroContato, emailContato);
         contatos.add(novoContato);
+    }
+
+    public void adicionarContatoComercial(String nomeContatoComercial, String numeroContatoComercial, String emailContatoComercial, String empresa) {
+        ContatoComercial novoContatoComercial;
+        novoContatoComercial = new ContatoComercial(nomeContatoComercial, numeroContatoComercial, emailContatoComercial, empresa);
+        contatos.add(novoContatoComercial);
+
     }
 
     public void listarContatos() {

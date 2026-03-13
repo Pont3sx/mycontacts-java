@@ -17,10 +17,11 @@ public class Main {
         while (SistemaEmExecucao) {
             System.out.println("====AGENDA DE CONTATOS====");
             System.out.println("Digite 1 para Adicionar novo Contato");
-            System.out.println("Digite 2 para Listar os Contatos");
-            System.out.println("Digite 3 para Buscar Contato por Nome");
-            System.out.println("Digite 4 para Remover Contato");
-            System.out.println("Digite 5 para Sair");
+            System.out.println("Digite 2 para Adicionar novo Contato Comercial");
+            System.out.println("Digite 3 para Listar os Contatos");
+            System.out.println("Digite 4 para Buscar Contato por Nome");
+            System.out.println("Digite 5 para Remover Contato");
+            System.out.println("Digite 6 para Sair");
             System.out.print("Digite um número: ");
 
             int numeroMenu = leitorInput.nextInt();
@@ -38,10 +39,25 @@ public class Main {
 
                     agenda.adicionarContato(novoNome, novoTelefone, novoEmail);
                     break;
-                case 2:
-                    agenda.listarContatos();
+                case 2 :
+                    System.out.println("Digite um Nome para adicionar ao contato comercial: ");
+                    String novoNomeComercial = leitorInput.nextLine();
+
+                    System.out.println("Digite um Telefone para adicionar ao contato comercial: ");
+                    String novoTelefoneComercial = leitorInput.nextLine();
+
+                    System.out.println("Digite um E-mail para adicionar ao contato comercial: ");
+                    String novoEmailComercial = leitorInput.nextLine();
+
+                    System.out.println("Digite uma Empresa para adicionar ao contato comercial: ");
+                    String empresaComercial = leitorInput.nextLine();
+
+                    agenda.adicionarContatoComercial(novoNomeComercial, novoTelefoneComercial, novoEmailComercial, empresaComercial);
                     break;
                 case 3:
+                    agenda.listarContatos();
+                    break;
+                case 4:
                     System.out.println("Digite um Nome para buscar:");
                     String nomeBuscado = leitorInput.nextLine();
 
@@ -51,7 +67,7 @@ public class Main {
                         System.out.println(excecao.getMessage());
                     }
                     break;
-                case 4:
+                case 5:
                     System.out.println("Digite um Nome para ser removido: ");
                     String nomeRemovido = leitorInput.nextLine();
 
@@ -61,7 +77,7 @@ public class Main {
                         System.out.println(excecao.getMessage());
                     }
                     break;
-                case 5:
+                case 6:
                     System.out.println("Encerrando Sitema...");
                     SistemaEmExecucao = false;
                     break;
