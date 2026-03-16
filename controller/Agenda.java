@@ -8,33 +8,37 @@ import java.util.ArrayList;
 
 public class Agenda {
     //Arraylist que armazena os contatos
-    private ArrayList<Contato> contatos = new ArrayList<>();
+    private ArrayList<Contato> listaContatos = new ArrayList<>();
 
     //Métodos
+    //Cria um novo contato e adiciona a lista
     public void adicionarContato(String nomeContato, String numeroContato, String emailContato) {
         Contato novoContato;
         novoContato = new Contato(nomeContato, numeroContato, emailContato);
-        contatos.add(novoContato);
+        listaContatos.add(novoContato);
     }
 
+    //Cria um novo contato comercial e adiciona a lista
     public void adicionarContatoComercial(String nomeContatoComercial, String numeroContatoComercial, String emailContatoComercial, String empresa) {
         ContatoComercial novoContatoComercial;
         novoContatoComercial = new ContatoComercial(nomeContatoComercial, numeroContatoComercial, emailContatoComercial, empresa);
-        contatos.add(novoContatoComercial);
+        listaContatos.add(novoContatoComercial);
 
     }
 
+    //Lista todos os contatos existentes
     public void listarContatos() {
         System.out.println("Sua Lista de Contatos: ");
-        for (Contato contato : contatos) {
+        for (Contato contato : listaContatos) {
             contato.exibirContato();
         }
     }
 
+    //Busca um contato / ler um contato atravez do nome e exibe
     public void buscarPorNome(String nomeContato) throws ContatoNaoEncontradoException {
         Contato contatoEncontrado = null;
 
-        for (Contato contato : contatos) {
+        for (Contato contato : listaContatos) {
             if (contato.getNome().equalsIgnoreCase(nomeContato)) {
                 contatoEncontrado = contato;
                 break;
@@ -47,17 +51,18 @@ public class Agenda {
         }
     }
 
+    //Busca um contato / remove um contato
     public void removerContato(String nomeContato) throws ContatoNaoEncontradoException {
         Contato contatoEncontrado = null;
 
-        for (Contato contato : contatos) {
+        for (Contato contato : listaContatos) {
             if (contato.getNome().equalsIgnoreCase(nomeContato)) {
                 contatoEncontrado = contato;
                 break;
             }
         }
         if (contatoEncontrado != null) {
-            contatos.remove(contatoEncontrado);
+            listaContatos.remove(contatoEncontrado);
         } else {
             throw new ContatoNaoEncontradoException("Esse contato não existe!");
         }
