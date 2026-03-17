@@ -29,6 +29,12 @@ public class Agenda {
     //Lista todos os contatos existentes
     public void listarContatos() {
         System.out.println("Sua Lista de Contatos: ");
+
+        if (listaContatos.isEmpty()) {
+            System.out.println("Nenhum contato cadastrado.");
+            return;
+        }
+
         for (Contato contato : listaContatos) {
             contato.exibirContato();
         }
