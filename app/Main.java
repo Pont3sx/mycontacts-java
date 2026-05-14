@@ -2,6 +2,7 @@ package app;
 
 import controller.Agenda;
 import exceptions.ContatoNaoEncontradoException;
+import utils.ValidadorEmail;
 
 import java.util.Scanner;
 
@@ -21,12 +22,16 @@ public class Main {
             System.out.println("Digite 3 para Listar os Contatos");
             System.out.println("Digite 4 para Buscar Contato por Nome");
             System.out.println("Digite 5 para Remover Contato");
-            System.out.println("Digite 6 para Sair");
+            System.out.println("Digite 0 para Sair");
             System.out.print("Digite um número: ");
 
             int numeroMenu = leitorInput.nextInt();
             leitorInput.nextLine();
             switch (numeroMenu) {
+                case 0:
+                    System.out.println("Encerrando Sitema...");
+                    SistemaEmExecucao = false;
+                    break;
                 case 1:
                     System.out.println("Digite um Nome para adicionar ao contato: ");
                     String novoNome = leitorInput.nextLine();
@@ -36,6 +41,13 @@ public class Main {
 
                     System.out.println("Digite um E-mail para adicionar ao contato: ");
                     String novoEmail = leitorInput.nextLine();
+
+                    while (!ValidadorEmail.emailValido(novoEmail)) {
+                        System.out.println("Email inválido!");
+                        System.out.println("Digite novamente: ");
+
+                        novoEmail = leitorInput.nextLine();
+                    }
 
                     agenda.adicionarContato(novoNome, novoTelefone, novoEmail);
                     break;
@@ -48,6 +60,13 @@ public class Main {
 
                     System.out.println("Digite um E-mail para adicionar ao contato comercial: ");
                     String novoEmailComercial = leitorInput.nextLine();
+
+                    while (!ValidadorEmail.emailValido(novoEmailComercial)) {
+                        System.out.println("Email inválido!");
+                        System.out.println("Digite novamente: ");
+
+                        novoEmailComercial = leitorInput.nextLine();
+                    }
 
                     System.out.println("Digite uma Empresa para adicionar ao contato comercial: ");
                     String empresaComercial = leitorInput.nextLine();
@@ -76,10 +95,6 @@ public class Main {
                     } catch (ContatoNaoEncontradoException excecao) {
                         System.out.println(excecao.getMessage());
                     }
-                    break;
-                case 6:
-                    System.out.println("Encerrando Sitema...");
-                    SistemaEmExecucao = false;
                     break;
                 default:
                     System.out.println("Opção inexistente! Digite outro número.");

@@ -3,6 +3,7 @@ package controller;
 import exceptions.ContatoNaoEncontradoException;
 import model.Contato;
 import model.ContatoComercial;
+import utils.ValidadorEmail;
 
 import java.util.ArrayList;
 
@@ -13,6 +14,11 @@ public class Agenda {
     //Métodos
     //Cria um novo contato e adiciona a lista
     public void adicionarContato(String nomeContato, String numeroContato, String emailContato) {
+        if (!ValidadorEmail.emailValido(emailContato)) {
+            System.out.println("Email inválido!");
+            return;
+        }
+
         Contato novoContato;
         novoContato = new Contato(nomeContato, numeroContato, emailContato);
         listaContatos.add(novoContato);
@@ -20,6 +26,11 @@ public class Agenda {
 
     //Cria um novo contato comercial e adiciona a lista
     public void adicionarContatoComercial(String nomeContatoComercial, String numeroContatoComercial, String emailContatoComercial, String empresa) {
+        if (!ValidadorEmail.emailValido(emailContatoComercial)) {
+            System.out.println("Email inválido!");
+            return;
+        }
+
         ContatoComercial novoContatoComercial;
         novoContatoComercial = new ContatoComercial(nomeContatoComercial, numeroContatoComercial, emailContatoComercial, empresa);
         listaContatos.add(novoContatoComercial);
