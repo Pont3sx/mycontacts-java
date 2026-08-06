@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.CadastroController"
+      styleClass="form-container"
+      spacing="16"
+      prefWidth="420">
+
+    <Label text="Novo Contato" styleClass="form-titulo"/>
+
+    <GridPane styleClass="form-grid" hgap="12" vgap="12">
+
+        <Label text="Tipo:" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="form-label"/>
+        <ComboBox fx:id="comboTipo"
+                  GridPane.rowIndex="0" GridPane.columnIndex="1"
+                  maxWidth="Infinity"/>
+
+        <Label text="Nome: *" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="form-label"/>
+        <TextField fx:id="campoNome"
+                   promptText="Nome completo"
+                   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Telefone:" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="form-label"/>
+        <TextField fx:id="campoTelefone"
+                   promptText="(00) 00000-0000"
+                   GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="E-mail: *" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="form-label"/>
+        <TextField fx:id="campoEmail"
+                   promptText="exemplo@email.com"
+                   GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+        <Label text="Empresa:" GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="form-label"/>
+        <TextField fx:id="campoEmpresa"
+                   promptText="Nome da empresa"
+                   GridPane.rowIndex="4" GridPane.columnIndex="1"
+                   disable="true"/>
+
+    </GridPane>
+
+    <Label fx:id="labelErro" styleClass="label-erro" wrapText="true"/>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Cancelar"
+                styleClass="btn-cancelar"
+                onAction="#onCancelar"/>
+        <Button text="Salvar"
+                styleClass="btn-salvar"
+                onAction="#onSalvar"
+                defaultButton="true"/>
+    </HBox>
+
+    <Label text="* Campos obrigatórios" styleClass="label-obrigatorio"/>
+
+</VBox>

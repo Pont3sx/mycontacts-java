@@ -1,0 +1,105 @@
+//package src.main.java.app;
+//
+//import src.main.java.controller.Agenda;
+//import src.main.java.exceptions.ContatoNaoEncontradoException;
+//import src.main.java.utils.ValidadorEmail;
+//
+//import java.util.Scanner;
+//
+//public class Main {
+//    public static void main(String[] args) {
+//        boolean SistemaEmExecucao = true;
+//
+//        Scanner leitorInput = new Scanner(System.in);
+//
+//        Agenda agenda = new Agenda();
+//
+//        System.out.println("Bem-vindo ao MyContacts!");
+//        while (SistemaEmExecucao) {
+//            System.out.println("====AGENDA DE CONTATOS====");
+//            System.out.println("Digite 1 para Adicionar novo Contato");
+//            System.out.println("Digite 2 para Adicionar novo Contato Comercial");
+//            System.out.println("Digite 3 para Listar os Contatos");
+//            System.out.println("Digite 4 para Buscar Contato por Nome");
+//            System.out.println("Digite 5 para Remover Contato");
+//            System.out.println("Digite 0 para Sair");
+//            System.out.print("Digite um número: ");
+//
+//            int numeroMenu = leitorInput.nextInt();
+//            leitorInput.nextLine();
+//            switch (numeroMenu) {
+//                case 0:
+//                    System.out.println("Encerrando Sitema...");
+//                    SistemaEmExecucao = false;
+//                    break;
+//                case 1:
+//                    System.out.println("Digite um Nome para adicionar ao contato: ");
+//                    String novoNome = leitorInput.nextLine();
+//
+//                    System.out.println("Digite um Telefone para adicionar ao contato: ");
+//                    String novoTelefone = leitorInput.nextLine();
+//
+//                    System.out.println("Digite um E-mail para adicionar ao contato: ");
+//                    String novoEmail = leitorInput.nextLine();
+//
+//                    while (!ValidadorEmail.emailValido(novoEmail)) {
+//                        System.out.println("Email inválido!");
+//                        System.out.println("Digite novamente: ");
+//
+//                        novoEmail = leitorInput.nextLine();
+//                    }
+//
+//                    agenda.adicionarContato(novoNome, novoTelefone, novoEmail);
+//                    break;
+//                case 2 :
+//                    System.out.println("Digite um Nome para adicionar ao contato comercial: ");
+//                    String novoNomeComercial = leitorInput.nextLine();
+//
+//                    System.out.println("Digite um Telefone para adicionar ao contato comercial: ");
+//                    String novoTelefoneComercial = leitorInput.nextLine();
+//
+//                    System.out.println("Digite um E-mail para adicionar ao contato comercial: ");
+//                    String novoEmailComercial = leitorInput.nextLine();
+//
+//                    while (!ValidadorEmail.emailValido(novoEmailComercial)) {
+//                        System.out.println("Email inválido!");
+//                        System.out.println("Digite novamente: ");
+//
+//                        novoEmailComercial = leitorInput.nextLine();
+//                    }
+//
+//                    System.out.println("Digite uma Empresa para adicionar ao contato comercial: ");
+//                    String empresaComercial = leitorInput.nextLine();
+//
+//                    agenda.adicionarContatoComercial(novoNomeComercial, novoTelefoneComercial, novoEmailComercial, empresaComercial);
+//                    break;
+//                case 3:
+//                    agenda.listarContatos();
+//                    break;
+//                case 4:
+//                    System.out.println("Digite um Nome para buscar:");
+//                    String nomeBuscado = leitorInput.nextLine();
+//
+//                    try {
+//                        agenda.buscarPorNome(nomeBuscado);
+//                    } catch (ContatoNaoEncontradoException excecao) {
+//                        System.out.println(excecao.getMessage());
+//                    }
+//                    break;
+//                case 5:
+//                    System.out.println("Digite um Nome para ser removido: ");
+//                    String nomeRemovido = leitorInput.nextLine();
+//
+//                    try {
+//                        agenda.removerContato(nomeRemovido);
+//                    } catch (ContatoNaoEncontradoException excecao) {
+//                        System.out.println(excecao.getMessage());
+//                    }
+//                    break;
+//                default:
+//                    System.out.println("Opção inexistente! Digite outro número.");
+//            }
+//        }
+//        leitorInput.close();
+//    }
+//}
