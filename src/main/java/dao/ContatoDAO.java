@@ -23,135 +23,213 @@ public class ContatoDAO {
         return conexaoInjetada != null ? conexaoInjetada : Conexao.getConexao();
     }
 
+    private boolean usaConexaoInjetada() {
+        return conexaoInjetada != null;
+    }
+
     public void inserir(Contato contato) throws SQLException {
         String sql = "INSERT INTO contatos (nome, telefone, email, empresa) VALUES (?, ?, ?, ?)";
 
-        try (Connection conexao = obterConexao();
-            PreparedStatement stmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        Connection conexao = obterConexao();
 
-            stmt.setString(1, contato.getNome());
-            stmt.setString(2, contato.getTelefone());
-            stmt.setString(3, contato.getEmail());
+        try {
+            try (PreparedStatement stmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            if (contato instanceof ContatoComercial contatoComercial) {
-                stmt.setString(4, contatoComercial.getEmpresa());
-            } else {
-                stmt.setNull(4, Types.VARCHAR);
-            }
-            stmt.executeUpdate();
+                stmt.setString(1, contato.getNome());
+                stmt.setString(2, contato.getTelefone());
+                stmt.setString(3, contato.getEmail());
 
-            try (ResultSet chaves = stmt.getGeneratedKeys()) {
-                if (chaves.next()) {
-                    contato.setId(chaves.getInt(1));
+                if (contato instanceof ContatoComercial contatoComercial) {
+                    stmt.setString(4, contatoComercial.getEmpresa());
+                } else {
+                    stmt.setNull(4, Types.VARCHAR);
                 }
+
+                stmt.executeUpdate();
+
+                try (ResultSet chaves = stmt.getGeneratedKeys()) {
+                    if (chaves.next()) {
+                        contato.setId(chaves.getInt(1));
+                    }
+                }
+            }
+        } finally {
+            if (!usaConexaoInjetada()) {
+                conexao.close();
             }
         }
     }
 
     public List<Contato> buscarTodos() throws SQLException {
         String sql = "SELECT * FROM contatos ORDER BY nome";
-        List<Contato> contatoList = new ArrayList<>();
 
-        try (Connection connection = obterConexao();
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery()) {
+        List<Contato> contatos = new ArrayList<>();
 
-            while (resultSet.next()) {
-                contatoList.add(mapearContato(resultSet));
+        Connection conexao = obterConexao();
+
+        try {
+            try (PreparedStatement stmt = conexao.prepareStatement(sql);
+                 ResultSet rs = stmt.executeQuery()) {
+
+                while (rs.next()) {
+                    contatos.add(mapearContato(rs));
+                }
             }
-            return contatoList;
+
+            return contatos;
+
+        } finally {
+            if (!usaConexaoInjetada()) {
+                conexao.close();
+            }
         }
     }
 
     public List<Contato> buscarPorNome(String nome) throws SQLException {
         String sql = "SELECT * FROM contatos WHERE nome LIKE ? ORDER BY nome";
-        List<Contato> contatoList = new ArrayList<>();
 
-        try (Connection connection = obterConexao();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+        List<Contato> contatos = new ArrayList<>();
 
-            statement.setString(1, "%" + nome + "%");
+        Connection conexao = obterConexao();
 
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    contatoList.add(mapearContato(resultSet));
+        try {
+            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+
+                stmt.setString(1, "%" + nome + "%");
+
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        contatos.add(mapearContato(rs));
+                    }
                 }
             }
+
+            return contatos;
+
+        } finally {
+            if (!usaConexaoInjetada()) {
+                conexao.close();
+            }
         }
-        return contatoList;
     }
 
     public Contato buscarPorId(int id) throws SQLException, ContatoNaoEncontradoException {
         String sql = "SELECT * FROM contatos WHERE id = ?";
 
-        try (Connection connection = obterConexao();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+        Connection conexao = obterConexao();
 
-            statement.setInt(1, id);
+        try {
+            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
 
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    return mapearContato(resultSet);
+                stmt.setInt(1, id);
+
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        return mapearContato(rs);
+                    }
                 }
             }
-        }
-        throw new ContatoNaoEncontradoException("Contato com o id: " + id + " não encontrado no banco!");
-    }
 
-    public void atualizar(Contato contato) throws SQLException, ContatoNaoEncontradoException {
-        String sql = "UPDATE contatos SET nome = ?, telefone = ?, email = ?, empresa = ? WHERE id = ?";
-
-        try (Connection connection = obterConexao();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
-
-            statement.setString(1, contato.getNome());
-            statement.setString(2, contato.getTelefone());
-            statement.setString(3, contato.getEmail());
-
-            if (contato instanceof ContatoComercial contatoComercial) {
-                statement.setString(4, contatoComercial.getEmpresa());
-            } else {
-                statement.setNull(4, Types.VARCHAR);
-            }
-
-            statement.setInt(5, contato.getId());
-
-            int linhasAfetadas = statement.executeUpdate();
-            if (linhasAfetadas == 0) {
-                throw new ContatoNaoEncontradoException("Nenhum contato com o id:" + contato.getId() + " para atualizar." );
+        } finally {
+            if (!usaConexaoInjetada()) {
+                conexao.close();
             }
         }
+
+        throw new ContatoNaoEncontradoException(
+                "Contato com o id " + id + " não encontrado.");
     }
 
-    public void deletar(int id) throws SQLException, ContatoNaoEncontradoException {
-        String sql = ("DELETE FROM contatos WHERE id = ?");
+    public void atualizar(Contato contato)
+            throws SQLException, ContatoNaoEncontradoException {
 
-        try (Connection connection = obterConexao();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+        String sql = """
+                UPDATE contatos
+                SET nome = ?, telefone = ?, email = ?, empresa = ?
+                WHERE id = ?
+                """;
 
-            statement.setInt(1, id);
+        Connection conexao = obterConexao();
 
-            int linhasAfetadas = statement.executeUpdate();
-            if (linhasAfetadas == 0) {
-                throw new ContatoNaoEncontradoException("Contato com o id:" + id + " não encontrado para exclusão." );
+        try {
+            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+
+                stmt.setString(1, contato.getNome());
+                stmt.setString(2, contato.getTelefone());
+                stmt.setString(3, contato.getEmail());
+
+                if (contato instanceof ContatoComercial contatoComercial) {
+                    stmt.setString(4, contatoComercial.getEmpresa());
+                } else {
+                    stmt.setNull(4, Types.VARCHAR);
+                }
+
+                stmt.setInt(5, contato.getId());
+
+                int linhasAfetadas = stmt.executeUpdate();
+
+                if (linhasAfetadas == 0) {
+                    throw new ContatoNaoEncontradoException(
+                            "Nenhum contato com o id "
+                                    + contato.getId()
+                                    + " para atualizar.");
+                }
+            }
+
+        } finally {
+            if (!usaConexaoInjetada()) {
+                conexao.close();
             }
         }
     }
 
-    private Contato mapearContato(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt("id");
-        String nome = resultSet.getString("nome");
-        String telefone = resultSet.getString("telefone");
-        String email = resultSet.getString("email");
-        String empresa = resultSet.getString("empresa");
+    public void deletar(int id)
+            throws SQLException, ContatoNaoEncontradoException {
+
+        String sql = "DELETE FROM contatos WHERE id = ?";
+
+        Connection conexao = obterConexao();
+
+        try {
+            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+
+                stmt.setInt(1, id);
+
+                int linhasAfetadas = stmt.executeUpdate();
+
+                if (linhasAfetadas == 0) {
+                    throw new ContatoNaoEncontradoException(
+                            "Contato com o id "
+                                    + id
+                                    + " não encontrado para exclusão.");
+                }
+            }
+
+        } finally {
+            if (!usaConexaoInjetada()) {
+                conexao.close();
+            }
+        }
+    }
+
+    private Contato mapearContato(ResultSet rs) throws SQLException {
+
+        int id = rs.getInt("id");
+        String nome = rs.getString("nome");
+        String telefone = rs.getString("telefone");
+        String email = rs.getString("email");
+        String empresa = rs.getString("empresa");
 
         Contato contato;
+
         if (empresa != null && !empresa.isBlank()) {
             contato = new ContatoComercial(nome, telefone, email, empresa);
         } else {
             contato = new Contato(nome, telefone, email);
         }
+
         contato.setId(id);
+
         return contato;
     }
 }
