@@ -1,0 +1,244 @@
+-------------------------------------------------------------------------------
+Test set: ContatoDAOTest
+-------------------------------------------------------------------------------
+Tests run: 11, Failures: 1, Errors: 10, Skipped: 0, Time elapsed: 1.066 s <<< FAILURE! -- in ContatoDAOTest
+ContatoDAOTest.inserir_contatoSimples_deveAtribuirIdDoBanco -- Time elapsed: 0.913 s <<< ERROR!
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1422)
+	at org.h2.jdbc.JdbcConnection.createStatement(JdbcConnection.java:234)
+	at ContatoDAOTest.encerrar(ContatoDAOTest.java:48)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+ContatoDAOTest.deletar_deveRemoverApenasUm -- Time elapsed: 0.008 s <<< ERROR!
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1422)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:1091)
+	at dao.ContatoDAO.inserir(ContatoDAO.java:30)
+	at ContatoDAOTest.deletar_deveRemoverApenasUm(ContatoDAOTest.java:149)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	Suppressed: org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+		at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+		at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+		at org.h2.message.DbException.get(DbException.java:223)
+		at org.h2.message.DbException.get(DbException.java:199)
+		at org.h2.message.DbException.get(DbException.java:188)
+		at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1422)
+		at org.h2.jdbc.JdbcConnection.createStatement(JdbcConnection.java:234)
+		at ContatoDAOTest.encerrar(ContatoDAOTest.java:48)
+		... 3 more
+
+ContatoDAOTest.deletar_existente_deveRemoverDoBanco -- Time elapsed: 0.004 s <<< ERROR!
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1422)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:314)
+	at dao.ContatoDAO.deletar(ContatoDAO.java:130)
+	at ContatoDAOTest.deletar_existente_deveRemoverDoBanco(ContatoDAOTest.java:133)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	Suppressed: org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+		at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+		at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+		at org.h2.message.DbException.get(DbException.java:223)
+		at org.h2.message.DbException.get(DbException.java:199)
+		at org.h2.message.DbException.get(DbException.java:188)
+		at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1422)
+		at org.h2.jdbc.JdbcConnection.createStatement(JdbcConnection.java:234)
+		at ContatoDAOTest.encerrar(ContatoDAOTest.java:48)
+		... 3 more
+
+ContatoDAOTest.buscarPorId_inexistente_deveLancarExcecao -- Time elapsed: 0.035 s <<< ERROR!
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1422)
+	at org.h2.jdbc.JdbcConnection.createStatement(JdbcConnection.java:234)
+	at ContatoDAOTest.encerrar(ContatoDAOTest.java:48)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+ContatoDAOTest.buscarPorId_existente_deveRetornarContato -- Time elapsed: 0.003 s <<< ERROR!
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1422)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:314)
+	at dao.ContatoDAO.buscarPorId(ContatoDAO.java:88)
+	at ContatoDAOTest.buscarPorId_existente_deveRetornarContato(ContatoDAOTest.java:95)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	Suppressed: org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+		at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+		at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+		at org.h2.message.DbException.get(DbException.java:223)
+		at org.h2.message.DbException.get(DbException.java:199)
+		at org.h2.message.DbException.get(DbException.java:188)
+		at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1422)
+		at org.h2.jdbc.JdbcConnection.createStatement(JdbcConnection.java:234)
+		at ContatoDAOTest.encerrar(ContatoDAOTest.java:48)
+		... 3 more
+
+ContatoDAOTest.atualizar_dadosValidos_deveModificarNoBanco -- Time elapsed: 0.003 s <<< ERROR!
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1422)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:314)
+	at dao.ContatoDAO.atualizar(ContatoDAO.java:105)
+	at ContatoDAOTest.atualizar_dadosValidos_deveModificarNoBanco(ContatoDAOTest.java:122)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	Suppressed: org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+		at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+		at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+		at org.h2.message.DbException.get(DbException.java:223)
+		at org.h2.message.DbException.get(DbException.java:199)
+		at org.h2.message.DbException.get(DbException.java:188)
+		at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1422)
+		at org.h2.jdbc.JdbcConnection.createStatement(JdbcConnection.java:234)
+		at ContatoDAOTest.encerrar(ContatoDAOTest.java:48)
+		... 3 more
+
+ContatoDAOTest.buscarTodos_bancoVazio_deveRetornarListaVazia -- Time elapsed: 0.012 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
+	at ContatoDAOTest.buscarTodos_bancoVazio_deveRetornarListaVazia(ContatoDAOTest.java:78)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	Suppressed: org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+		at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+		at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+		at org.h2.message.DbException.get(DbException.java:223)
+		at org.h2.message.DbException.get(DbException.java:199)
+		at org.h2.message.DbException.get(DbException.java:188)
+		at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1422)
+		at org.h2.jdbc.JdbcConnection.createStatement(JdbcConnection.java:234)
+		at ContatoDAOTest.encerrar(ContatoDAOTest.java:48)
+		... 3 more
+
+ContatoDAOTest.buscarPorNome_parcial_deveEncontrar -- Time elapsed: 0.002 s <<< ERROR!
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1422)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:1091)
+	at dao.ContatoDAO.inserir(ContatoDAO.java:30)
+	at ContatoDAOTest.buscarPorNome_parcial_deveEncontrar(ContatoDAOTest.java:109)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	Suppressed: org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+		at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+		at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+		at org.h2.message.DbException.get(DbException.java:223)
+		at org.h2.message.DbException.get(DbException.java:199)
+		at org.h2.message.DbException.get(DbException.java:188)
+		at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1422)
+		at org.h2.jdbc.JdbcConnection.createStatement(JdbcConnection.java:234)
+		at ContatoDAOTest.encerrar(ContatoDAOTest.java:48)
+		... 3 more
+
+ContatoDAOTest.inserir_contatoComercial_deveSalvarEmpresa -- Time elapsed: 0.002 s <<< ERROR!
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1422)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:314)
+	at dao.ContatoDAO.buscarPorId(ContatoDAO.java:88)
+	at ContatoDAOTest.inserir_contatoComercial_deveSalvarEmpresa(ContatoDAOTest.java:70)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	Suppressed: org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+		at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+		at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+		at org.h2.message.DbException.get(DbException.java:223)
+		at org.h2.message.DbException.get(DbException.java:199)
+		at org.h2.message.DbException.get(DbException.java:188)
+		at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1422)
+		at org.h2.jdbc.JdbcConnection.createStatement(JdbcConnection.java:234)
+		at ContatoDAOTest.encerrar(ContatoDAOTest.java:48)
+		... 3 more
+
+ContatoDAOTest.deletar_inexistente_deveLancarExcecao -- Time elapsed: 0.002 s <<< ERROR!
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1422)
+	at org.h2.jdbc.JdbcConnection.createStatement(JdbcConnection.java:234)
+	at ContatoDAOTest.encerrar(ContatoDAOTest.java:48)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+ContatoDAOTest.buscarTodos_aposInserir_deveRetornarTodos -- Time elapsed: 0.002 s <<< ERROR!
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1422)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:1091)
+	at dao.ContatoDAO.inserir(ContatoDAO.java:30)
+	at ContatoDAOTest.buscarTodos_aposInserir_deveRetornarTodos(ContatoDAOTest.java:85)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	Suppressed: org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+		at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+		at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+		at org.h2.message.DbException.get(DbException.java:223)
+		at org.h2.message.DbException.get(DbException.java:199)
+		at org.h2.message.DbException.get(DbException.java:188)
+		at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1422)
+		at org.h2.jdbc.JdbcConnection.createStatement(JdbcConnection.java:234)
+		at ContatoDAOTest.encerrar(ContatoDAOTest.java:48)
+		... 3 more
+
